@@ -10,3 +10,5 @@ You can create also reports for the executed tests
 - createAccountTests
 - signInTests
 - webElementsTests
+
+![Imagine 1](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/Raport.jpg)
