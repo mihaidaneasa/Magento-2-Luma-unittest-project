@@ -167,7 +167,7 @@ class WebElementsTests(unittest.TestCase):
                 return f'I have encountered a problem {str(e)}'
 
         # Verify if the elements ar sorted
-        self.assertTrue(True, 'The products are not sorted')
+        self.assertTrue(True, 'The products are sorted')
 
 
 
