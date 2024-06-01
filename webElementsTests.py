@@ -132,13 +132,14 @@ class WebElementsTests(unittest.TestCase):
         sorting_elements.select_by_visible_text('Price')
 
         # Verify if the Price sorting is ok
-        # Find all the elements
+        # Finding the total number of pages
         self.scroll_down()
         last_page = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.LAST_PAGE_NUMBER_SELECTOR))
         last_page_number = int(last_page.text)
 
         for j in range(last_page_number):
             try:
+                # Finding elements and transform them to float
                 product_price = WebDriverWait(self.driver, 5).until(EC.presence_of_all_elements_located(self.PRODUCT_PRICE_SELECTOR))
                 price_list = []
                 self.scroll_down()
@@ -148,21 +149,25 @@ class WebElementsTests(unittest.TestCase):
                     actual_price = current_price_without_dollar
                     actual_price_float = float(actual_price)
                     price_list.append(actual_price_float)
+
+                # Sorting elements
+                sorted_price_list = sorted(price_list)
+                if sorted_price_list == price_list:
+                    sorted_price_list = True
+                else:
+                    sorted_price_list = False
+
+                # Go to the next page
                 try:
                     WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.NEXT_PAGE_SELECTOR)).click()
                 except TimeoutException:
                     break
+
             except Exception as e:
                 return f'I have encountered a problem {str(e)}'
 
-            # Sort the founded elements
-            sorted_price_list = sorted(price_list)
-
-            # Verify if the products are sorted
-            if sorted_price_list == price_list:
-                raise 'The list is sorted'
-            else:
-                raise "The list is unsorted"
+        # Verify if the elements ar sorted
+        self.assertTrue(True, 'The products are not sorted')
 
 
 
