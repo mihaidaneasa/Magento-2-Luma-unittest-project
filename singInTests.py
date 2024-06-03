@@ -13,34 +13,35 @@ class SingInTests(unittest.TestCase):
     URL = 'https://osc-ultimate-demo.mageplaza.com/'
 
     CLOSE_DEMO_NAVIGATION_SELECTOR = (By.XPATH, '//button[@class="navigation-close" and @title="Close navigation"]')
-    WELCOME_MESSAGE_SELECTOR = (By.XPATH, '//span[@class="logged-in"]')
-    SIGN_IN_SELECTOR = (By.XPATH, '//a[contains(text(), "Sign In")]')
-    SIGNIN_EMAIL_SELECTOR = (By.XPATH, '//input[@id="social_login_email"]')
-    SIGNIN_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="social_login_pass"]')
-    SIGNIN_BUTTON_SELECTOR = (By.XPATH, '//button[@id="bnt-social-login-authentication"]')
-    SIGNIN_ERROR_MESSAGE_1 = (By.XPATH, '//div[contains(text(), "Invalid login or password.")]')
-    SIGNIN_ERROR_MESSAGE_2 = (By.XPATH, '//div[@id="social_login_email-error"]')
-    FACEBOOCK_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-facebook"]')
     FACEBOOCK_ACCEPT_COOKIES_SELECTOR = (By.XPATH, '//button[@data-cookiebanner="accept_button" and @type="submit"] | //span[contains(text(), "Allow all cookies")]')
     FACEBOOCK_ERROR_MESSAGE_SELECTOR = (By.XPATH, '//div[@class="fsl fwb fcb" and contains(text(), "Error Accessing App")]')
-    LINKEDIN_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-linkedin"]')
+    FACEBOOCK_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-facebook"]')
     LINKEDIN_ERROR_MESSAGE_SELECTOR = (By.XPATH, '//p[@class="message"]')
-    YAHOO_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-yahoo"]')
-    YAHOO_USER_EMAIL_SELECTOR = (By.XPATH, '//input[@class="phone-no "]')
-    YAHOO_NEXT_BUTTON_SELECTOR_1 = (By.XPATH, '//input[@id="login-signin"]')
-    YAHOO_USER_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="login-passwd" and @class="password"]')
-    YAHOO_NEXT_BUTTON_SELECTOR_2 = (By.XPATH, '//button[@id="login-signin"]')
+    LINKEDIN_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-linkedin"]')
     YAHOO_ACCEPT_COOKIES_SELECTOR = (By.XPATH, '//button[@class="pure-button puree-button-primary oauth2-authorize-button"]')
-    YAHOO_INPUT_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="request-password-social"]')
     YAHOO_CONFIRM_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="request-password-confirmation"]')
+    YAHOO_INPUT_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="request-password-social"]')
+    YAHOO_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-yahoo"]')
+    YAHOO_NEXT_BUTTON_SELECTOR_1 = (By.XPATH, '//input[@id="login-signin"]')
+    YAHOO_NEXT_BUTTON_SELECTOR_2 = (By.XPATH, '//button[@id="login-signin"]')
     YAHOO_SUBMIT_SELECTOR = (By.XPATH, '//button[@class="action send primary"]')
-    GITHUB_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-github"]')
+    YAHOO_USER_EMAIL_SELECTOR = (By.XPATH, '//input[@class="phone-no "]')
+    YAHOO_USER_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="login-passwd" and @class="password"]')
     GITHUB_EMAIL_SELECTOR = (By.XPATH, '//input[@class="form-control input-block js-login-field"]')
+    GITHUB_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-github"]')
     GITHUB_PASSWORD_SELECTOR = (By.XPATH, '//input[@class="form-control form-control input-block js-password-field"]')
     GITHUB_SIGNIN_BUTTON_SELECTOR = (By.XPATH, '//input[@class="btn btn-primary btn-block js-sign-in-button"]')
-    SIGN_OUT_MENU_SELECTOR = (By.XPATH, '//button[@class="action switch" and @data-action="customer-menu-toggle"]')
+    SIGNIN_BUTTON_SELECTOR = (By.XPATH, '//button[@id="bnt-social-login-authentication"]')
+    SIGNIN_EMAIL_SELECTOR = (By.XPATH, '//input[@id="social_login_email"]')
+    SIGNIN_ERROR_MESSAGE_1 = (By.XPATH, '//div[contains(text(), "Invalid login or password.")]')
+    SIGNIN_ERROR_MESSAGE_2 = (By.XPATH, '//div[@id="social_login_email-error"]')
+    SIGNIN_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="social_login_pass"]')
+    SIGNIN_SELECTOR = (By.XPATH, '//a[contains(text(), "Sign In")]')
     SIGN_OUT_BUTTON_SELECTOR = (By.XPATH, '//li[@class="link authorization-link"]')
+    SIGN_OUT_MENU_SELECTOR = (By.XPATH, '//button[@class="action switch" and @data-action="customer-menu-toggle"]')
     SIGN_OUT_MESSAGE_SELECTOR = (By.XPATH, '//span[@data-ui-id="page-title-wrapper"]')
+    WELCOME_MESSAGE_SELECTOR = (By.XPATH, '//span[@class="logged-in"]')
+
 
     def setUp(self, uc=None):
         chrome_options = Options()
@@ -70,8 +71,8 @@ class SingInTests(unittest.TestCase):
 
     def sign_in(self, email, password):
         # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SIGN_IN_SELECTOR))
-        sign_in = self.driver.find_element(*self.SIGN_IN_SELECTOR)
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SIGNIN_SELECTOR))
+        sign_in = self.driver.find_element(*self.SIGNIN_SELECTOR)
         email_input = self.driver.find_element(*self.SIGNIN_EMAIL_SELECTOR)
         password_input = self.driver.find_element(*self.SIGNIN_PASSWORD_SELECTOR)
         signin_button = self.driver.find_element(*self.SIGNIN_BUTTON_SELECTOR)
@@ -90,7 +91,7 @@ class SingInTests(unittest.TestCase):
         signin_button.click()
 
     def signin_button(self):
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SIGN_IN_SELECTOR)).click()
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SIGNIN_SELECTOR)).click()
 
     def test_01_positive_signin(self):
         self.close_demo_navigation()

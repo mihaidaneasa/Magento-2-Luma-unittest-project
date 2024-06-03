@@ -16,22 +16,23 @@ class WebElementsTests(unittest.TestCase):
     URL = 'https://osc-ultimate-demo.mageplaza.com/'
 
     CLOSE_DEMO_NAVIGATION_SELECTOR = (By.XPATH, '//button[@class="navigation-close" and @title="Close navigation"]')
-    SEARCH_BAR_SELECTOR = (By.XPATH, '//input[@id="search" and @class="input-text"]')
-    SEARCH_BUTTON_SELECTOR = (By.XPATH, '//button[@type="submit" and @class="action search"]')
-    PRODUCT_ITEM_SELECTOR = (By.XPATH, '//div[@class="product details product-item-details"]')
-    PRODUCT_NAME_SELECTOR = (By.XPATH, '//strong[@class="product name product-item-name"]')
-    PRODUCT_PRICE_SELECTOR = (By.XPATH, '//span[@data-price-type="finalPrice"]')
-    TOTAL_SEARCHED_ITEMS_SELECTOR = (By.XPATH, '//p[@class="toolbar-amount"]/span[last()]')
-    SEARCH_ERROR_SELECTOR = (By.XPATH, '//div[contains(text(), "Your search returned no results. ")]')
-    WHAT_IS_NEW_MENU_SELECTOR = (By.XPATH, '//span[contains(text(), \"What\'s New")]')
+    LAST_PAGE_NUMBER_SELECTOR = (By.XPATH, '//div[@class="pages"]/ul[@class="items pages-items"]/li[@class="item"][last()]/a/span[last()][last()]')
+    NEXT_PAGE_SELECTOR = (By.XPATH, '//a[@class="action  next"]')
     PRODUCT_CATEGORY_SELECTOR = (By.XPATH, '(//a[contains(text(), "Hoodies & Sweatshirts")])[2]')
     PRODUCT_COLOR_SELECTOR = (By.XPATH, '//div[contains(text(), "Color")]')
     PRODUCT_COLOR_WHITE_SELECTOR = (By.XPATH, '//div[@class="swatch-option color " and @data-option-label="White"]')
+    PRODUCT_ITEM_SELECTOR = (By.XPATH, '//div[@class="product details product-item-details"]')
+    PRODUCT_NAME_SELECTOR = (By.XPATH, '//strong[@class="product name product-item-name"]')
+    PRODUCT_PRICE_SELECTOR = (By.XPATH, '//span[@data-price-type="finalPrice"]')
     PRODUCT_SIZE_SELECTOR = (By.XPATH, '//div[contains(text(), "Size")]')
     PRODUCT_SIZE_L_SELECTOR = (By.XPATH, '//div[@class="swatch-option text " and @data-option-label="L"]')
+    SEARCH_BAR_SELECTOR = (By.XPATH, '//input[@id="search" and @class="input-text"]')
+    SEARCH_BUTTON_SELECTOR = (By.XPATH, '//button[@type="submit" and @class="action search"]')
+    SEARCH_ERROR_SELECTOR = (By.XPATH, '//div[contains(text(), "Your search returned no results. ")]')
     SORTING_MENU_SELECTOR = (By.XPATH, '//select[@id="sorter" and @class="sorter-options"]')
-    LAST_PAGE_NUMBER_SELECTOR = (By.XPATH, '//div[@class="pages"]/ul[@class="items pages-items"]/li[@class="item"][last()]/a/span[last()][last()]')
-    NEXT_PAGE_SELECTOR = (By.XPATH, '//a[@class="action  next"]')
+    TOTAL_SEARCHED_ITEMS_SELECTOR = (By.XPATH, '//p[@class="toolbar-amount"]/span[last()]')
+
+    WHAT_IS_NEW_MENU_SELECTOR = (By.XPATH, '//span[contains(text(), \"What\'s New")]')
 
     def setUp(self):
         chrome_options = Options()
