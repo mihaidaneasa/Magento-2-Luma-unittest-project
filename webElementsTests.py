@@ -132,17 +132,14 @@ class WebElementsTests(unittest.TestCase):
         sorting_elements.select_by_visible_text('Price')
 
         # Verify if the Price sorting is ok
-        # Finding the total number of pages
-        self.scroll_down()
-        last_page = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.LAST_PAGE_NUMBER_SELECTOR))
-        last_page_number = int(last_page.text)
-
-        for j in range(last_page_number):
+        i = 1
+        while True:
             try:
                 # Finding elements and transform them to float
                 product_price = WebDriverWait(self.driver, 5).until(EC.presence_of_all_elements_located(self.PRODUCT_PRICE_SELECTOR))
                 price_list = []
                 self.scroll_down()
+
                 for i in range(len(product_price)):
                     current_price = product_price[i].text
                     current_price_without_dollar = current_price.replace('$', '')
@@ -152,22 +149,26 @@ class WebElementsTests(unittest.TestCase):
 
                 # Sorting elements
                 sorted_price_list = sorted(price_list)
-                if sorted_price_list == price_list:
-                    sorted_price_list = True
-                else:
-                    sorted_price_list = False
 
                 # Go to the next page
                 try:
-                    WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.NEXT_PAGE_SELECTOR)).click()
+                    if sorted_price_list == price_list:
+                        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.NEXT_PAGE_SELECTOR)).click()
+                        message = 'The list is sorted'
+                    elif sorted_price_list != price_list:
+                        message = 'The list is unsorted'
+                    else:
+                        break
+
                 except TimeoutException:
                     break
 
             except Exception as e:
                 return f'I have encountered a problem {str(e)}'
+            i += 1
 
-        # Verify if the elements ar sorted
-        self.assertTrue(True, 'The products are sorted')
+            # Verify if the elements ar sorted
+            self.assertIs('The list is sorted', message, 'The list is unsorted')
 
 
 
