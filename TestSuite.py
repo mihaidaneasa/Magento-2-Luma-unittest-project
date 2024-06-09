@@ -2,6 +2,7 @@ import unittest
 import HtmlTestRunner
 
 from createAccountTests import CreateAccountTests
+from cartTests import CartTests
 from singInTests import SingInTests
 from webElementsTests import WebElementsTests
 
@@ -13,6 +14,7 @@ class TestSuite(unittest.TestCase):
 
         tests_to_run.addTests([
             unittest.defaultTestLoader.loadTestsFromTestCase(CreateAccountTests),
+            unittest.defaultTestLoader.loadTestsFromTestCase(CartTests),
             unittest.defaultTestLoader.loadTestsFromTestCase(SingInTests),
             unittest.defaultTestLoader.loadTestsFromTestCase(WebElementsTests)
         ])

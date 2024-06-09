@@ -1,7 +1,5 @@
-import time
 import unittest
 
-from collections import OrderedDict
 from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
@@ -15,23 +13,33 @@ class WebElementsTests(unittest.TestCase):
 
     URL = 'https://osc-ultimate-demo.mageplaza.com/'
 
+    ADD_TO_CART_SELECTOR = (By.XPATH, '//button[@type="submit" and @title="Add to Cart"]')
+    CART_MESSAGE_SELECTOR = (By.XPATH, '//')
     CLOSE_DEMO_NAVIGATION_SELECTOR = (By.XPATH, '//button[@class="navigation-close" and @title="Close navigation"]')
     LAST_PAGE_NUMBER_SELECTOR = (By.XPATH, '//div[@class="pages"]/ul[@class="items pages-items"]/li[@class="item"][last()]/a/span[last()][last()]')
+    MAN_BOTTOMS_MENU_SELECTOR = (By.XPATH, '//a[@id="ui-id-18"]')
+    MAN_MENU_SELECTOR = (By.XPATH, '//li[@class="level0 nav-3 category-item level-top parent ui-menu-item"]')
+    MAN_PANTS_MENU_SELECTOR = (By.XPATH, '//a[@id="ui-id-19"]')
     NEXT_PAGE_SELECTOR = (By.XPATH, '//a[@class="action  next"]')
     PRODUCT_CATEGORY_SELECTOR = (By.XPATH, '(//a[contains(text(), "Hoodies & Sweatshirts")])[2]')
     PRODUCT_COLOR_SELECTOR = (By.XPATH, '//div[contains(text(), "Color")]')
     PRODUCT_COLOR_WHITE_SELECTOR = (By.XPATH, '//div[@class="swatch-option color " and @data-option-label="White"]')
+    PRODUCT_COLOR_BLUE_SELECTOR = (By.XPATH, '//div[@class="swatch-option color" and @data-option-label="Blue"]')
     PRODUCT_ITEM_SELECTOR = (By.XPATH, '//div[@class="product details product-item-details"]')
-    PRODUCT_NAME_SELECTOR = (By.XPATH, '//strong[@class="product name product-item-name"]')
+    PRODUCT_NAME_SELECTOR = (By.XPATH, '(//strong[@class="product name product-item-name"])[2]')
+    PRODUCT_PRESENTATION_IMAGES_SELECTOR = (By.XPATH, '//div[@class="fotorama__thumb fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img"]')
+    PRODUCT_FINAL_PRICE_SELECTOR = (By.XPATH, '//span[@data-price-type="finalPrice"]')
     PRODUCT_PRICE_SELECTOR = (By.XPATH, '//span[@data-price-type="finalPrice"]')
     PRODUCT_SIZE_SELECTOR = (By.XPATH, '//div[contains(text(), "Size")]')
+    PRODUCT_SIZE_34_SELECTOR = (By.XPATH, '//div[@class="swatch-option text" and @data-option-label="34"]')
     PRODUCT_SIZE_L_SELECTOR = (By.XPATH, '//div[@class="swatch-option text " and @data-option-label="L"]')
+    PRODUCT_STYLE_SELECTOR = (By.XPATH, '//div[contains(text(), "Style")]')
+    PRODUCT_STYLE_SWEATPANTS_SELECTOR = (By.XPATH, '//a[contains(text(), "Sweatpants")]')
     SEARCH_BAR_SELECTOR = (By.XPATH, '//input[@id="search" and @class="input-text"]')
     SEARCH_BUTTON_SELECTOR = (By.XPATH, '//button[@type="submit" and @class="action search"]')
     SEARCH_ERROR_SELECTOR = (By.XPATH, '//div[contains(text(), "Your search returned no results. ")]')
     SORTING_MENU_SELECTOR = (By.XPATH, '//select[@id="sorter" and @class="sorter-options"]')
     TOTAL_SEARCHED_ITEMS_SELECTOR = (By.XPATH, '//p[@class="toolbar-amount"]/span[last()]')
-
     WHAT_IS_NEW_MENU_SELECTOR = (By.XPATH, '//span[contains(text(), \"What\'s New")]')
 
     def setUp(self):
@@ -52,6 +60,10 @@ class WebElementsTests(unittest.TestCase):
     def close_demo_navigation(self):
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.CLOSE_DEMO_NAVIGATION_SELECTOR)).click()
 
+    def scroll_down(self):
+        for i in range(30):
+            self.driver.execute_script(f"window.scrollTo(0, {i * 500});")
+
     def search_items(self, text):
         # Find elements
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SEARCH_BAR_SELECTOR))
@@ -64,10 +76,6 @@ class WebElementsTests(unittest.TestCase):
         search_bar.send_keys(text)
 
         search_button.click()
-
-    def scroll_down(self):
-        for i in range(30):
-            self.driver.execute_script(f"window.scrollTo(0, {i * 500});")
 
     def test_01_search_product(self):
         self.close_demo_navigation()
@@ -92,7 +100,7 @@ class WebElementsTests(unittest.TestCase):
                       message_text,
                       'Error, I can not find anything')
 
-    def test_03_selecting_filter(self):
+    def test_03_selecting_products_filter(self):
         self.close_demo_navigation()
 
         # Find and click the "What's new" product category
@@ -144,9 +152,8 @@ class WebElementsTests(unittest.TestCase):
                 for i in range(len(product_price)):
                     current_price = product_price[i].text
                     current_price_without_dollar = current_price.replace('$', '')
-                    actual_price = current_price_without_dollar
-                    actual_price_float = float(actual_price)
-                    price_list.append(actual_price_float)
+                    actual_price = float(current_price_without_dollar)
+                    price_list.append(actual_price)
 
                 # Sorting elements
                 sorted_price_list = sorted(price_list)
@@ -169,7 +176,48 @@ class WebElementsTests(unittest.TestCase):
             i += 1
 
             # Verify if the elements ar sorted
-            self.assertIs('The list is sorted', message, 'The list is unsorted')
+            self.assertIs('The list is sorted',
+                          message,
+                          'The list is unsorted')
+
+    def test_05_apply_filters_to_a_product(self):
+        self.close_demo_navigation()
+
+        # Select pants products from the list
+        man_manu = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.MAN_MENU_SELECTOR))
+        ActionChains(self.driver).move_to_element(man_manu).perform()
+        bottoms_menu = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(self.MAN_BOTTOMS_MENU_SELECTOR))
+        ActionChains(self.driver).move_to_element(bottoms_menu).perform()
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.MAN_PANTS_MENU_SELECTOR)).click()
+
+        # Find and select the product style
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.PRODUCT_STYLE_SELECTOR)).click()
+
+        # Find and select "Sweatpants" style
+        WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(self.PRODUCT_STYLE_SWEATPANTS_SELECTOR)).click()
+
+        # Find and select the desired product
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.PRODUCT_NAME_SELECTOR)).click()
+
+        # Verify if the product has presentation images
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.PRODUCT_PRESENTATION_IMAGES_SELECTOR))
+        presentation_images = self.driver.find_elements(*self.PRODUCT_PRESENTATION_IMAGES_SELECTOR)
+        listed_images_1 = list(presentation_images)
+
+        # Find and select the size "34"
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.PRODUCT_SIZE_34_SELECTOR)).click()
+
+        # Find and select the color "Blue"
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.PRODUCT_COLOR_BLUE_SELECTOR)).click()
+
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.PRODUCT_PRESENTATION_IMAGES_SELECTOR))
+        presentation_images = self.driver.find_elements(*self.PRODUCT_PRESENTATION_IMAGES_SELECTOR)
+        listed_images_2 = list(presentation_images)
+
+        # Verify if the filter modifies the page
+        self.assertEqual(f'{len(listed_images_1)}', f'{len(listed_images_2)}', 'The page was modified')
 
 
 
