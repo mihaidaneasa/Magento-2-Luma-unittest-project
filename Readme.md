@@ -9,6 +9,7 @@ All tests may be run from terminal commands:
 You can create also reports for the executed tests
 
 ### Project structure
+- cartTests
 - createAccountTests
 - signInTests
 - webElementsTests

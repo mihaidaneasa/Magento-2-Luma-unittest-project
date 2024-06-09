@@ -150,7 +150,7 @@ class CartTests(unittest.TestCase):
         selected_product_name = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SELECTED_PRODUCT_NAME_SELECTOR))
         product_name_1 = selected_product_name.text
 
-        self.size_34_and_color_blue()
+        self.size_34_and_color_blue(1)
 
         # Add the product to cart
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.ADD_TO_CART_SELECTOR)).click()
@@ -175,7 +175,7 @@ class CartTests(unittest.TestCase):
         time.sleep(3)
         self.select_a_product()
 
-        self.size_34_and_color_blue()
+        self.size_34_and_color_blue(1)
 
         # Add the product to cart
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.ADD_TO_CART_SELECTOR)).click()
