@@ -9,9 +9,10 @@ All tests may be run from terminal commands:
 You can create also reports for the executed tests
 
 ### Project structure
-- cartTests
 - createAccountTests
 - signInTests
+- myAccountTests
+- cartTests
 - webElementsTests
 
 ![Imagine 1](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/Raport.jpg)

@@ -195,8 +195,7 @@ class WebElementsTests(unittest.TestCase):
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.PRODUCT_STYLE_SELECTOR)).click()
 
         # Find and select "Sweatpants" style
-        WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(self.PRODUCT_STYLE_SWEATPANTS_SELECTOR)).click()
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.PRODUCT_STYLE_SWEATPANTS_SELECTOR)).click()
 
         # Find and select the desired product
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.PRODUCT_NAME_SELECTOR)).click()
@@ -218,10 +217,3 @@ class WebElementsTests(unittest.TestCase):
 
         # Verify if the filter modifies the page
         self.assertEqual(f'{len(listed_images_1)}', f'{len(listed_images_2)}', 'The page was modified')
-
-
-
-
-
-
-
