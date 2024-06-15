@@ -15,4 +15,5 @@ You can create also reports for the executed tests
 - cartTests
 - webElementsTests
 
-![Imagine 1](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/Raport.jpg)
+![Imagine 1](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/Raport1.jpg)
+![Imagine 2](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/Raport2.jpg)
