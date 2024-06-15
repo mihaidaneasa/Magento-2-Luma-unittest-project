@@ -152,7 +152,7 @@ class MyAccount(unittest.TestCase):
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.MY_ACCOUNT_BUTTON_SELECTOR)).click()
 
         # Edit the shipping address with correct values
-        self.edit_shipping_address('@#$%', 'Romania', 'Alba', '1', '@#$%', '@#$%')
+        self.edit_shipping_address('@#$%', 'Dacia', 'Singidava', '1', '@#$%', '@#$%')
 
         # Verify if the changes were saved
         time.sleep(1)
