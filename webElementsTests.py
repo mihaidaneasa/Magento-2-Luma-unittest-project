@@ -37,7 +37,7 @@ class WebElementsTests(unittest.TestCase):
     PRODUCT_STYLE_SWEATPANTS_SELECTOR = (By.XPATH, '//a[contains(text(), "Sweatpants")]')
     SEARCH_BAR_SELECTOR = (By.XPATH, '//input[@id="search" and @class="input-text"]')
     SEARCH_BUTTON_SELECTOR = (By.XPATH, '//button[@type="submit" and @class="action search"]')
-    SEARCH_ERROR_SELECTOR = (By.XPATH, '//div[contains(text(), "Your search returned no results. ")]')
+    SEARCH_ERROR_SELECTOR = (By.XPATH, '//div[@class="message notice"]/div[contains(text(), "Your search returned no results. ")]')
     SORTING_MENU_SELECTOR = (By.XPATH, '//select[@id="sorter" and @class="sorter-options"]')
     TOTAL_SEARCHED_ITEMS_SELECTOR = (By.XPATH, '//p[@class="toolbar-amount"]/span[last()]')
     WHAT_IS_NEW_MENU_SELECTOR = (By.XPATH, '//span[contains(text(), \"What\'s New")]')
@@ -96,7 +96,7 @@ class WebElementsTests(unittest.TestCase):
         message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SEARCH_ERROR_SELECTOR))
         message_text = message_container.text
 
-        self.assertIn(f'{message_container.text}',
+        self.assertIn(f'{message_text}',
                       message_text,
                       'Error, I can not find anything')
 

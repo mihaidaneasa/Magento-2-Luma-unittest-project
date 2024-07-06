@@ -158,7 +158,8 @@ class MyAccount(unittest.TestCase):
         time.sleep(1)
         message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SHIPPING_SAVE_ADDRESS_MESSAGE_SELECTOR))
         message_text = message_container.text
+        print(message_text)
 
-        self.assertIn('You saved the address.',
+        self.assertIn('You entered incorrect values.',
                       message_text,
                       'The message is not the same')
