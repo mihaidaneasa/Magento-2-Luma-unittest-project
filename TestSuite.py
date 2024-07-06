@@ -5,7 +5,7 @@ from createAccountTests import CreateAccountTests
 from singInTests import SingInTests
 from webElementsTests import WebElementsTests
 from myAccountTests import MyAccount
-from cartTests import CartTests
+from shopingCartTests import CartTests
 
 
 class TestSuite(unittest.TestCase):

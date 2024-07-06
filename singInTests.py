@@ -375,7 +375,7 @@ class SingInTests(unittest.TestCase):
                       message_text,
                       'ERROR! The text is not present on page!')
 
-    def test_09_log_put(self):
+    def test_09_log_out(self):
         self.close_demo_navigation()
 
         # Login

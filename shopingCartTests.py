@@ -265,7 +265,6 @@ class CartTests(unittest.TestCase):
                 discount_value = discount_amount.text
                 discount_value_without_dollar = discount_value.replace('$', '')
                 total_discount_value = float(discount_value_without_dollar)
-                print(total_discount_value)
                 order_value = (actual_price * i) + total_discount_value
             else:
                 order_value = actual_price * i
@@ -363,7 +362,6 @@ class CartTests(unittest.TestCase):
         # Verify if the order was successfully placed
         message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.THANKS_MESSAGE_SELECTOR))
         message_text = message_container.text
-        print(message_text)
 
         self.assertIn('Thank you for your purchase!',
                       message_text,
