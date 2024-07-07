@@ -7,7 +7,6 @@ from webElementsTests import WebElementsTests
 from myAccountTests import MyAccount
 from shoppingCartTests import CartTests
 
-
 class TestSuite(unittest.TestCase):
 
     def test_suite(self):
@@ -29,5 +28,3 @@ class TestSuite(unittest.TestCase):
         )
 
         runner.run(tests_to_run)
-
-
