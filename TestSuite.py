@@ -1,11 +1,11 @@
 import unittest
 import HtmlTestRunner
 
-from createAccountTests import CreateAccountTests
-from singInTests import SingInTests
-from webElementsTests import WebElementsTests
-from myAccountTests import MyAccount
-from shoppingCartTests import CartTests
+from tests.createAccountTests import CreateAccountTests
+from tests.singInTests import SingInTests
+from tests.searchAndFilterProductsTests import SearchAndFilterProducts
+from tests.myAccountTests import MyAccount
+from tests.shoppingCartTests import CartTests
 
 class TestSuite(unittest.TestCase):
 
@@ -16,7 +16,7 @@ class TestSuite(unittest.TestCase):
         tests_to_run.addTests([
             unittest.defaultTestLoader.loadTestsFromTestCase(CreateAccountTests),
             unittest.defaultTestLoader.loadTestsFromTestCase(SingInTests),
-            unittest.defaultTestLoader.loadTestsFromTestCase(WebElementsTests),
+            unittest.defaultTestLoader.loadTestsFromTestCase(SearchAndFilterProducts),
             unittest.defaultTestLoader.loadTestsFromTestCase(MyAccount),
             unittest.defaultTestLoader.loadTestsFromTestCase(CartTests)
         ])
