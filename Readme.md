@@ -36,5 +36,5 @@ You can create also reports for the executed tests
 - searchAndFilterProducts
 
 ### Tests results
-![Imagine 1](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/Raport1.jpg)
-![Imagine 2](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/Raport2.jpg)
+![Imagine 1](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/reports/Raport1.jpg)
+![Imagine 2](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/reports/Raport2.jpg)
