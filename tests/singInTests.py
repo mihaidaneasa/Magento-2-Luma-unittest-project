@@ -160,9 +160,11 @@ class SingInTests(unittest.TestCase):
 
         # Storing the current window handle to get back to dashboard
         main_page = self.driver.current_window_handle
+
+        # Click on sign in menu button
         self.signin_button()
 
-        # Find and click the faceboock_login buuton
+        # Find and click the faceboock login button
         self.driver.find_element(*self.FACEBOOCK_LOGIN_SELECTOR).click()
 
         # Storing the current window handle to get back to dashboard
@@ -203,6 +205,7 @@ class SingInTests(unittest.TestCase):
         # Storing the current window handle to get back to dashboard
         main_page = self.driver.current_window_handle
 
+        # Click on sign in menu button
         self.signin_button()
 
         # Find and click the linkedin_login button
@@ -237,6 +240,7 @@ class SingInTests(unittest.TestCase):
         # Storing the current window handle to get back to dashboard
         main_page = self.driver.current_window_handle
 
+        # Click on sign in menu button
         self.signin_button()
 
         # Find and click the yahoo_login button
@@ -329,6 +333,7 @@ class SingInTests(unittest.TestCase):
         # Storing the current window handle to get back to dashboard
         main_page = self.driver.current_window_handle
 
+        # Click on sign in menu button
         self.signin_button()
 
         # Find and click the github_login button
