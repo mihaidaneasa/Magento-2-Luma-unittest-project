@@ -247,7 +247,7 @@ class SingInTests(unittest.TestCase):
         self.driver.find_element(*self.YAHOO_LOGIN_SELECTOR).click()
 
         # Storing the current window handle to get back to dashboard
-        login_page = self.driver.current_window_handle
+        login_page = self.driver.window_handles
 
         # Changing the handles to access login page
         for currentWindow in self.driver.window_handles:
