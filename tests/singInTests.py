@@ -363,7 +363,7 @@ class SingInTests(unittest.TestCase):
 
         insert_password.click()
         insert_password.clear()
-        insert_password.send_keys('030208@Serban')
+        insert_password.send_keys('245228@Magento')
 
         signin_button.click()
 
