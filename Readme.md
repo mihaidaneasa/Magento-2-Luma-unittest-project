@@ -29,11 +29,27 @@ All tests may be run from terminal commands:
 You can create also reports for the executed tests
 
 ### Project structure
+1. help_methods
+- baseMethods
+- createAccountMethods
+- driverFile
+- editShippingAddressMethods
+- searchAndFilterProductsMethods
+- shoppingCartMethods
+2. help_selectors
+- createAccountSelectors
+- myAccountSelectors
+- searchAndFilterProductsSelectors
+- shoppingCartSelectors
+- signInSelectors
+3. reports
+4. tests
 - createAccountTests
 - signInTests
 - myAccountTests
 - shoppingCartTests
 - searchAndFilterProducts
+5. TestSuite
 
 ### Tests results
 ![Imagine 1](https://github.com/mihaidaneasa/Magento-2-Luma-unittest-project/blob/main/reports/Raport1.jpg)
