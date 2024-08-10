@@ -1,47 +1,13 @@
 import time
 import unittest
 
-from selenium import webdriver
 from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
+from help_methods.baseMethods import *
 
-class SingInTests(unittest.TestCase):
+
+class SingInTests(unittest.TestCase, BaseMethods):
 
     URL = 'https://osc-ultimate-demo.mageplaza.com/'
-
-    CLOSE_DEMO_NAVIGATION_SELECTOR = (By.XPATH, '//button[@class="navigation-close" and @title="Close navigation"]')
-    FACEBOOCK_ACCEPT_COOKIES_SELECTOR = (By.XPATH, '//button[@data-cookiebanner="accept_button" and @type="submit"] | //span[contains(text(), "Allow all cookies")]')
-    FACEBOOCK_ERROR_MESSAGE_SELECTOR = (By.XPATH, '//div[@class="fsl fwb fcb" and contains(text(), "Error Accessing App")]')
-    FACEBOOCK_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-facebook"]')
-    LINKEDIN_ERROR_MESSAGE_SELECTOR = (By.XPATH, '//p[@class="message"]')
-    LINKEDIN_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-linkedin"]')
-    YAHOO_ACCEPT_COOKIES_SELECTOR = (By.XPATH, '//button[@class="pure-button puree-button-primary oauth2-authorize-button"]')
-    YAHOO_CONFIRM_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="request-password-confirmation"]')
-    YAHOO_INPUT_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="request-password-social"]')
-    YAHOO_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-yahoo"]')
-    YAHOO_NEXT_BUTTON_SELECTOR_1 = (By.XPATH, '//input[@id="login-signin"]')
-    YAHOO_NEXT_BUTTON_SELECTOR_2 = (By.XPATH, '//button[@id="login-signin"]')
-    YAHOO_SUBMIT_SELECTOR = (By.XPATH, '//button[@class="action send primary"]')
-    YAHOO_USER_EMAIL_SELECTOR = (By.XPATH, '//input[@class="phone-no "]')
-    YAHOO_USER_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="login-passwd" and @class="password"]')
-    GITHUB_EMAIL_SELECTOR = (By.XPATH, '//input[@class="form-control input-block js-login-field"]')
-    GITHUB_LOGIN_SELECTOR = (By.XPATH, '//a[@class="btn btn-block btn-social btn-github"]')
-    GITHUB_PASSWORD_SELECTOR = (By.XPATH, '//input[@class="form-control form-control input-block js-password-field"]')
-    GITHUB_SIGNIN_BUTTON_SELECTOR = (By.XPATH, '//input[@class="btn btn-primary btn-block js-sign-in-button"]')
-    SIGNIN_BUTTON_SELECTOR = (By.XPATH, '//button[@id="bnt-social-login-authentication"]')
-    SIGNIN_EMAIL_SELECTOR = (By.XPATH, '//input[@id="social_login_email"]')
-    SIGNIN_ERROR_MESSAGE_1 = (By.XPATH, '//div[contains(text(), "Invalid login or password.")]')
-    SIGNIN_ERROR_MESSAGE_2 = (By.XPATH, '//div[@id="social_login_email-error"]')
-    SIGNIN_PASSWORD_SELECTOR = (By.XPATH, '//input[@id="social_login_pass"]')
-    SIGNIN_SELECTOR = (By.XPATH, '//a[contains(text(), "Sign In")]')
-    SIGN_OUT_BUTTON_SELECTOR = (By.XPATH, '//li[@class="link authorization-link"]')
-    SIGN_OUT_MENU_SELECTOR = (By.XPATH, '//button[@class="action switch" and @data-action="customer-menu-toggle"]')
-    SIGN_OUT_MESSAGE_SELECTOR = (By.XPATH, '//span[@data-ui-id="page-title-wrapper"]')
-    WELCOME_MESSAGE_SELECTOR = (By.XPATH, '//span[@class="logged-in"]')
-
 
     def setUp(self, uc=None):
         chrome_options = Options()
@@ -65,43 +31,14 @@ class SingInTests(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    def close_demo_navigation(self):
-        # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.CLOSE_DEMO_NAVIGATION_SELECTOR)).click()
-
-    def sign_in(self, email, password):
-        # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SIGNIN_SELECTOR))
-        sign_in = self.driver.find_element(*self.SIGNIN_SELECTOR)
-        email_input = self.driver.find_element(*self.SIGNIN_EMAIL_SELECTOR)
-        password_input = self.driver.find_element(*self.SIGNIN_PASSWORD_SELECTOR)
-        signin_button = self.driver.find_element(*self.SIGNIN_BUTTON_SELECTOR)
-
-        # Actions
-        sign_in.click()
-
-        email_input.click()
-        email_input.clear()
-        email_input.send_keys(email)
-
-        password_input.click()
-        password_input.clear()
-        password_input.send_keys(password)
-
-        signin_button.click()
-
-    def signin_button(self):
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SIGNIN_SELECTOR)).click()
-
     def test_01_positive_signin(self):
-        self.close_demo_navigation()
-        self.sign_in('testabc@test.com', 'test@magento1')
+        BaseMethods.close_demo_navigation(self)
+        BaseMethods.sign_in(self, 'testabc@test.com', 'test@magento1')
 
         # Verify if the code is ok
         # Find elements
         time.sleep(3)
-        message_container = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(self.WELCOME_MESSAGE_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -110,13 +47,12 @@ class SingInTests(unittest.TestCase):
                       'ERROR! The text is not present on page!')
 
     def test_02_wrong_email_signin(self):
-        self.close_demo_navigation()
-        self.sign_in('testare@test.com', 'test@magento1')
+        BaseMethods.close_demo_navigation(self)
+        BaseMethods.sign_in(self, 'testare@test.com', 'test@magento1')
 
         # Verify if the code is ok
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(self.SIGNIN_ERROR_MESSAGE_1))
+        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SIGNIN_ERROR_MESSAGE_1))
         message_text = message_container.text
 
         # Actions
@@ -125,13 +61,12 @@ class SingInTests(unittest.TestCase):
                       'ERROR! The text is not present on page!')
 
     def test_03_wrong_password_signin(self):
-        self.close_demo_navigation()
-        self.sign_in('testabc@test.com', 'testalfa@magento1')
+        BaseMethods.close_demo_navigation(self)
+        BaseMethods.sign_in(self, 'testabc@test.com', 'testalfa@magento1')
 
         # Verify if the code is ok
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(self.SIGNIN_ERROR_MESSAGE_1))
+        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SIGNIN_ERROR_MESSAGE_1))
         message_text = message_container.text
 
         # Actions
@@ -140,13 +75,12 @@ class SingInTests(unittest.TestCase):
                       'ERROR! The text is not present on page!')
 
     def test_04_invalid_email_signin(self):
-        self.close_demo_navigation()
-        self.sign_in('testabc#test.com', 'test@magento1')
+        BaseMethods.close_demo_navigation(self)
+        BaseMethods.sign_in(self, 'testabc#test.com', 'test@magento1')
 
         # Verify if the code is ok
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(self.SIGNIN_ERROR_MESSAGE_2))
+        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SIGNIN_ERROR_MESSAGE_2))
         message_text = message_container.text
 
         # Actions
@@ -156,16 +90,16 @@ class SingInTests(unittest.TestCase):
 
     def test_05_faceboock_login(self):
         global login_page
-        self.close_demo_navigation()
+        BaseMethods.close_demo_navigation(self)
 
         # Storing the current window handle to get back to dashboard
         main_page = self.driver.current_window_handle
 
         # Click on sign in menu button
-        self.signin_button()
+        BaseMethods.signin_button(self)
 
         # Find and click the faceboock login button
-        self.driver.find_element(*self.FACEBOOCK_LOGIN_SELECTOR).click()
+        self.driver.find_element(*FACEBOOCK_LOGIN_SELECTOR).click()
 
         # Storing the current window handle to get back to dashboard
         login_page = self.driver.current_window_handle
@@ -183,14 +117,13 @@ class SingInTests(unittest.TestCase):
             self.driver.execute_script(f"window.scrollTo(0, {i * 500});")
 
         # Accept cookies
-        accept_cookies = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(self.FACEBOOCK_ACCEPT_COOKIES_SELECTOR))
+        accept_cookies = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(FACEBOOCK_ACCEPT_COOKIES_SELECTOR))
         ActionChains(self.driver).move_to_element(accept_cookies).click(accept_cookies).perform()
 
         # Verify if the code is ok
         # Find elements
         message_container = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(self.FACEBOOCK_ERROR_MESSAGE_SELECTOR))
+            EC.presence_of_element_located(FACEBOOCK_ERROR_MESSAGE_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -200,16 +133,16 @@ class SingInTests(unittest.TestCase):
 
     def test_06_linkedin_login(self):
         global login_page
-        self.close_demo_navigation()
+        BaseMethods.close_demo_navigation(self)
 
         # Storing the current window handle to get back to dashboard
         main_page = self.driver.current_window_handle
 
         # Click on sign in menu button
-        self.signin_button()
+        BaseMethods.signin_button(self)
 
         # Find and click the linkedin_login button
-        self.driver.find_element(*self.LINKEDIN_LOGIN_SELECTOR).click()
+        self.driver.find_element(*LINKEDIN_LOGIN_SELECTOR).click()
 
         # Storing the current window handle to get back to dashboard
         login_page = self.driver.current_window_handle
@@ -225,7 +158,7 @@ class SingInTests(unittest.TestCase):
         # Verify if the code is ok
         # Find elements
         message_container = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located(self.LINKEDIN_ERROR_MESSAGE_SELECTOR))
+            EC.presence_of_element_located(LINKEDIN_ERROR_MESSAGE_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -235,16 +168,16 @@ class SingInTests(unittest.TestCase):
 
     def test_07_yahoo_login(self):
         global login_page
-        self.close_demo_navigation()
+        BaseMethods.close_demo_navigation(self)
 
         # Storing the current window handle to get back to dashboard
         main_page = self.driver.current_window_handle
 
         # Click on sign in menu button
-        self.signin_button()
+        BaseMethods.signin_button(self)
 
         # Find and click the yahoo_login button
-        self.driver.find_element(*self.YAHOO_LOGIN_SELECTOR).click()
+        self.driver.find_element(*YAHOO_LOGIN_SELECTOR).click()
 
         # Storing the current window handle to get back to dashboard
         login_page = self.driver.window_handles
@@ -259,9 +192,9 @@ class SingInTests(unittest.TestCase):
 
         # Input email
         # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.YAHOO_USER_EMAIL_SELECTOR))
-        user_email = self.driver.find_element(*self.YAHOO_USER_EMAIL_SELECTOR)
-        next_button = self.driver.find_element(*self.YAHOO_NEXT_BUTTON_SELECTOR_1)
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_USER_EMAIL_SELECTOR))
+        user_email = self.driver.find_element(*YAHOO_USER_EMAIL_SELECTOR)
+        next_button = self.driver.find_element(*YAHOO_NEXT_BUTTON_SELECTOR_1)
 
         # Actions
         user_email.click()
@@ -272,9 +205,9 @@ class SingInTests(unittest.TestCase):
 
         # Input password
         # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.YAHOO_USER_PASSWORD_SELECTOR))
-        user_password = self.driver.find_element(*self.YAHOO_USER_PASSWORD_SELECTOR)
-        next_button = self.driver.find_element(*self.YAHOO_NEXT_BUTTON_SELECTOR_2)
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_USER_PASSWORD_SELECTOR))
+        user_password = self.driver.find_element(*YAHOO_USER_PASSWORD_SELECTOR)
+        next_button = self.driver.find_element(*YAHOO_NEXT_BUTTON_SELECTOR_2)
 
         # Actions
         user_password.click()
@@ -285,8 +218,8 @@ class SingInTests(unittest.TestCase):
 
         # Accept cookies
         # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.YAHOO_ACCEPT_COOKIES_SELECTOR))
-        accept_cookies = self.driver.find_element(*self.YAHOO_ACCEPT_COOKIES_SELECTOR)
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_ACCEPT_COOKIES_SELECTOR))
+        accept_cookies = self.driver.find_element(*YAHOO_ACCEPT_COOKIES_SELECTOR)
 
         # Actions
         accept_cookies.click()
@@ -295,14 +228,14 @@ class SingInTests(unittest.TestCase):
         self.driver.switch_to.window(main_page)
 
         # Find and click yahoo_login button
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.YAHOO_LOGIN_SELECTOR)).click()
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_LOGIN_SELECTOR)).click()
 
         # Input and confirm password
         # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.YAHOO_INPUT_PASSWORD_SELECTOR))
-        insert_password = self.driver.find_element(*self.YAHOO_INPUT_PASSWORD_SELECTOR)
-        confirm_password = self.driver.find_element(*self.YAHOO_CONFIRM_PASSWORD_SELECTOR)
-        submit_button = self.driver.find_element(*self.YAHOO_SUBMIT_SELECTOR)
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_INPUT_PASSWORD_SELECTOR))
+        insert_password = self.driver.find_element(*YAHOO_INPUT_PASSWORD_SELECTOR)
+        confirm_password = self.driver.find_element(*YAHOO_CONFIRM_PASSWORD_SELECTOR)
+        submit_button = self.driver.find_element(*YAHOO_SUBMIT_SELECTOR)
 
         # Actions
         insert_password.click()
@@ -318,7 +251,7 @@ class SingInTests(unittest.TestCase):
         # Verify if the code is ok
         # Find elements
         time.sleep(5)
-        message_container = WebDriverWait(self.driver, 50).until(EC.presence_of_element_located(self.WELCOME_MESSAGE_SELECTOR))
+        message_container = WebDriverWait(self.driver, 50).until(EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -328,16 +261,16 @@ class SingInTests(unittest.TestCase):
 
     def test_08_github_login(self):
         global login_page
-        self.close_demo_navigation()
+        BaseMethods.close_demo_navigation(self)
 
         # Storing the current window handle to get back to dashboard
         main_page = self.driver.current_window_handle
 
         # Click on sign in menu button
-        self.signin_button()
+        BaseMethods.signin_button(self)
 
         # Find and click the github_login button
-        self.driver.find_element(*self.GITHUB_LOGIN_SELECTOR).click()
+        self.driver.find_element(*GITHUB_LOGIN_SELECTOR).click()
 
         # Storing the current window handle to get back to dashboard
         login_page = self.driver.current_window_handle
@@ -351,10 +284,10 @@ class SingInTests(unittest.TestCase):
                 break
 
         # Find Elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.GITHUB_EMAIL_SELECTOR))
-        insert_email = self.driver.find_element(*self.GITHUB_EMAIL_SELECTOR)
-        insert_password = self.driver.find_element(*self.GITHUB_PASSWORD_SELECTOR)
-        signin_button = self.driver.find_element(*self.GITHUB_SIGNIN_BUTTON_SELECTOR)
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(GITHUB_EMAIL_SELECTOR))
+        insert_email = self.driver.find_element(*GITHUB_EMAIL_SELECTOR)
+        insert_password = self.driver.find_element(*GITHUB_PASSWORD_SELECTOR)
+        signin_button = self.driver.find_element(*GITHUB_SIGNIN_BUTTON_SELECTOR)
 
         # Actions
         insert_email.click()
@@ -372,7 +305,7 @@ class SingInTests(unittest.TestCase):
 
         # Verify if we are logged in
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.WELCOME_MESSAGE_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -381,22 +314,22 @@ class SingInTests(unittest.TestCase):
                       'ERROR! The text is not present on page!')
 
     def test_09_log_out(self):
-        self.close_demo_navigation()
+        BaseMethods.close_demo_navigation(self)
 
         # Login
-        self.sign_in('testabc@test.com', 'test@magento1')
+        BaseMethods.sign_in(self, 'testabc@test.com', 'test@magento1')
 
         # Logout
         # Find and click the sign-out menu
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SIGN_OUT_MENU_SELECTOR)).click()
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SIGN_OUT_MENU_SELECTOR)).click()
 
         # Find and click the sign-out button
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(self.SIGN_OUT_BUTTON_SELECTOR)).click()
+        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(SIGN_OUT_BUTTON_SELECTOR)).click()
 
         # Verify if the code is ok
         # Find elements
         time.sleep(3)
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(self.SIGN_OUT_MESSAGE_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SIGN_OUT_MESSAGE_SELECTOR))
         message_text = message_container.text
 
         # Actions
