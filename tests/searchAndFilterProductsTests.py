@@ -41,7 +41,7 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
 
     def test_02_product_not_found(self):
         BaseMethods.close_demo_navigation(self)
-        SearchAndFilterProducts.search_items(self,'Bees')
+        SearchAndFilterProducts.search_items(self, 'Bees')
 
         message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SEARCH_ERROR_SELECTOR))
         message_text = message_container.text
@@ -66,7 +66,7 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(PRODUCT_COLOR_WHITE_SELECTOR)).click()
 
         # Find and select the product size
-        WebDriverWait(self.driver,5).until(EC.presence_of_element_located(PRODUCT_SIZE_SELECTOR)).click()
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(PRODUCT_SIZE_SELECTOR)).click()
 
         # Find and select the size "L"
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(PRODUCT_SIZE_L_SELECTOR)).click()
@@ -81,7 +81,7 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
 
     def test_04_sorting_items(self):
         BaseMethods.close_demo_navigation(self)
-        SearchAndFilterProducts.search_items(self,'pants')
+        SearchAndFilterProducts.search_items(self, 'pants')
 
         # Find elements
         sorting_menu = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SORTING_MENU_SELECTOR))

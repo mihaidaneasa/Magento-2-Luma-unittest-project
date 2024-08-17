@@ -1,7 +1,7 @@
 ## Magento 2 Demo Luma
 Welcome to the next generation of the world’s leading digital commerce platform! Built on open-source technology, Magento Commerce provides online merchants with unparalleled flexibility and control over the look, content, and functionality of their online stores. Magento’s intuitive Admin features powerful marketing, search engine optimization, and product management tools that give you the power to create sites that are tailored to your unique business needs. Robust and scalable, Magento offers you a stable, secure, and customizable solution for your growing business.
 
-### Application web site: 
+### Application website: 
 •	Frontend: https://osc-ultimate-demo.mageplaza.com/ 
 
 •	Backend: https://osc-ultimate-demo.mageplaza.com/admin/admin/dashboard/ 

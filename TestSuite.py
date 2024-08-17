@@ -7,6 +7,7 @@ from tests.searchAndFilterProductsTests import SearchAndFilterProducts
 from tests.myAccountTests import MyAccount
 from tests.shoppingCartTests import CartTests
 
+
 class TestSuite(unittest.TestCase):
 
     def test_suite(self):

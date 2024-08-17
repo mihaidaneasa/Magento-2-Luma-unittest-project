@@ -3,6 +3,7 @@ import unittest
 from help_methods.baseMethods import *
 from help_methods.shoppingCartMethods import *
 
+
 class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
     URL = 'https://osc-ultimate-demo.mageplaza.com/'
@@ -40,7 +41,7 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
         product_name_1 = selected_product_name.text
 
         # Select the desired options
-        ShoppingCart.select_size_and_color(self,1)
+        ShoppingCart.select_size_and_color(self, 1)
 
         # Add the product to cart
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(ADD_TO_CART_SELECTOR)).click()
@@ -67,7 +68,7 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
         ShoppingCart.select_a_product(self)
 
         # Select the desired options
-        ShoppingCart.select_size_and_color(self,1)
+        ShoppingCart.select_size_and_color(self, 1)
 
         # Add the product to cart
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(ADD_TO_CART_SELECTOR)).click()

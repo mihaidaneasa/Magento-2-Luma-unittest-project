@@ -4,6 +4,7 @@ import unittest
 from help_methods.baseMethods import *
 from help_methods.createAccountMethods import *
 
+
 class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
     URL = 'https://osc-ultimate-demo.mageplaza.com/'
@@ -32,7 +33,7 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
     def test_01_positive_create(self):
         BaseMethods.close_demo_navigation(self)
-        CreateAccount.create_account(self,'Mihai', 'Daneasa', 'testabc@test.com', 'test@magento1', 'test@magento1')
+        CreateAccount.create_account(self, 'Mihai', 'Daneasa', 'testabc@test.com', 'test@magento1', 'test@magento1')
 
         # Verify if the code is ok
         try:
@@ -67,7 +68,7 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
         message_text = message_container.text
 
         # Actions
-        self.assertIn('Please enter a valid email address (Ex: johndoe@domain.com',
+        self.assertIn('Please enter a valid email address (Ex: johndoe@domain.com).',
                       message_text,
                       'ERROR! The text is not present on page!')
 
@@ -87,7 +88,7 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
     def test_04_special_character_last_name_create(self):
         BaseMethods.close_demo_navigation(self)
-        CreateAccount.create_account(self,'Mihai', 'Daneas@', 'tastare@test.com', 'test@magento1', 'test@magento1')
+        CreateAccount.create_account(self, 'Mihai', 'Daneas@', 'tastare@test.com', 'test@magento1', 'test@magento1')
 
         # Verify if the code is ok
         # Find elements
@@ -101,7 +102,7 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
     def test_05_digit_character_in_name_create(self):
         BaseMethods.close_demo_navigation(self)
-        CreateAccount.create_account(self,'Mihai1', 'Daneasa1', 'testbeta@test.com', 'test@magento1', 'test@magento1')
+        CreateAccount.create_account(self, 'Mihai1', 'Daneasa1', 'testbeta@test.com', 'test@magento1', 'test@magento1')
 
         # Verify if the code is ok
         try:
@@ -143,7 +144,7 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
     def test_07_six_character_password_create(self):
         BaseMethods.close_demo_navigation(self)
-        CreateAccount.create_account(self,'Mihai', 'Daneasa', 'test123@test.com', '123456', '123456')
+        CreateAccount.create_account(self, 'Mihai', 'Daneasa', 'test123@test.com', '123456', '123456')
 
         # Verify if the code is ok
         # Find elements
@@ -157,7 +158,7 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
     def test_08_invalid_password_create(self):
         BaseMethods.close_demo_navigation(self)
-        CreateAccount.create_account(self,'Mihai', 'Daneasa', 'test123@test.com', '12345678', '12345678')
+        CreateAccount.create_account(self, 'Mihai', 'Daneasa', 'test123@test.com', '12345678', '12345678')
 
         # Verify if the code is ok
         # Find elements

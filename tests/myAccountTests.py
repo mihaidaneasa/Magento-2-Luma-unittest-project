@@ -6,6 +6,7 @@ from help_methods.baseMethods import *
 from help_methods.editShippingAddressMethods import *
 from help_selectors.myAccountSelectors import *
 
+
 class MyAccount(unittest.TestCase, BaseMethods, EditShippingAddress):
 
     URL = 'https://osc-ultimate-demo.mageplaza.com/'
@@ -45,7 +46,7 @@ class MyAccount(unittest.TestCase, BaseMethods, EditShippingAddress):
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MY_ACCOUNT_BUTTON_SELECTOR)).click()
 
         # Edit the shipping address with correct values
-        EditShippingAddress.edit_shipping_address(self,'Street', 'Romania', 'Alba', '0721234567', 'Cugir', '515600')
+        EditShippingAddress.edit_shipping_address(self, 'Street', 'Romania', 'Alba', '0721234567', 'Cugir', '515600')
 
         # Verify if the changes were saved
         time.sleep(1)

@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from help_methods.driverFile import *
 from help_selectors.signInSelectors import *
 
+
 class BaseMethods(Driver):
 
     def close_demo_navigation(self):

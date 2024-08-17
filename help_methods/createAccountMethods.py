@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from help_selectors.createAccountSelectors import *
 from help_methods.driverFile import *
 
+
 class CreateAccount(Driver):
 
     def create_account(self, firstname, lastname, email, password, confirmPassword):

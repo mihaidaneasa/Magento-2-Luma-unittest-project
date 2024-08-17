@@ -6,6 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from help_methods.driverFile import *
 from help_selectors.shoppingCartSelectors import *
 
+
 class ShoppingCart(Driver):
 
     def select_a_product(self):

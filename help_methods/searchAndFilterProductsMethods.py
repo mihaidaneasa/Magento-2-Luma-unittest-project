@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from help_methods.driverFile import *
 from help_selectors.searchAndFilterProductsSelectors import *
 
+
 class SearchAndFilterProducts(Driver):
 
     def scroll_down(self):
