@@ -223,10 +223,6 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
         time.sleep(3)
         ShoppingCart.select_a_product(self)
 
-        # storing the product name
-        selected_product_name = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SELECTED_PRODUCT_NAME_SELECTOR))
-        product_name_1 = selected_product_name.text
-
         # Select the desired options
         ShoppingCart.select_size_and_color(self, 1)
 

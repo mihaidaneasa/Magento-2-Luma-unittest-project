@@ -2,9 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
-class Driver():
+class Driver:
 
     URL = 'https://osc-ultimate-demo.mageplaza.com/'
+
+    def __init__(self):
+        self.driver = None
 
     def driver(self):
         chrome_options = Options()

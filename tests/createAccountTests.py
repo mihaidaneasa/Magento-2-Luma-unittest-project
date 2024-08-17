@@ -40,7 +40,6 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
             message_container = self.driver.find_element(*WELCOME_MESSAGE_SELECTOR)
             create_account = True
         except:
-            # message_container = self.driver.find_element(*self.ERROR_CREATE_MESSAGE_SELECTOR)
             create_account = False
 
         if create_account:
@@ -109,7 +108,6 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
             message_container = self.driver.find_element(*WELCOME_MESSAGE_SELECTOR)
             create_account = True
         except:
-            # message_container = self.driver.find_element(*self.ERROR_CREATE_MESSAGE_SELECTOR)
             create_account = False
 
         if create_account:
