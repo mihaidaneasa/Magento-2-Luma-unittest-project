@@ -37,7 +37,7 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         # Verify if the code is ok
         try:
-            message_container = self.driver.find_element(*WELCOME_MESSAGE_SELECTOR)
+            self.driver.find_element(*WELCOME_MESSAGE_SELECTOR)
             create_account = True
         except:
             create_account = False
@@ -105,7 +105,7 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         # Verify if the code is ok
         try:
-            message_container = self.driver.find_element(*WELCOME_MESSAGE_SELECTOR)
+            self.driver.find_element(*WELCOME_MESSAGE_SELECTOR)
             create_account = True
         except:
             create_account = False
