@@ -9,7 +9,6 @@ from help_methods.searchAndFilterProductsMethods import *
 
 
 class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterProducts):
-
     URL = 'https://osc-ultimate-demo.mageplaza.com/'
 
     def setUp(self):
@@ -32,23 +31,38 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
         SearchAndFilterProducts.search_items(self, 'Hood')
 
         # Verify if the code is ok
-        total_items = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(TOTAL_SEARCHED_ITEMS_SELECTOR))
-        total_items_founded = total_items.text
+        while True:
+            total_items = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located(TOTAL_SEARCHED_ITEMS_SELECTOR))
+            total_items_founded = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located(TOTAL_ITEMS_ON_PAGE_SELECTOR))
+            total_items_on_page = self.driver.find_element(*TOTAL_ITEMS_ON_PAGE_SELECTOR)
+
+            try:
+                if total_items.text != total_items_on_page.text:
+                    SearchAndFilterProducts.scroll_down(self)
+                    WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(NEXT_PAGE_SELECTOR)).click()
+                    SearchAndFilterProducts.scroll_down(self)
+                else:
+                    break
+
+            except TimeoutException:
+                break
 
         self.assertIn(f'{total_items.text}',
-                      total_items_founded,
+                      f'{total_items_founded.text}',
                       'Error, I can not find anything')
 
     def test_02_product_not_found(self):
         BaseMethods.close_demo_navigation(self)
         SearchAndFilterProducts.search_items(self, 'Bees')
 
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SEARCH_ERROR_SELECTOR))
-        message_text = message_container.text
+        # Verify if the code is ok
+        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SEARCH_ERROR_SELECTOR)).text
 
-        self.assertIn(f'{message_text}',
-                      message_text,
-                      'Error, I can not find anything')
+        self.assertEqual(f'{message_container}',
+                         'Your search returned no results.\nDid you mean\nbase\nbest',
+                         'Error, The message is not the same')
 
     def test_03_selecting_products_filter(self):
         BaseMethods.close_demo_navigation(self)
@@ -73,11 +87,11 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
 
         # Verify if the code is ok
         total_items = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(TOTAL_SEARCHED_ITEMS_SELECTOR))
-        total_items_founded = total_items.text
+        total_items_founded = WebDriverWait(self.driver, 5).until(EC.presence_of_all_elements_located(PRODUCT_ITEM_SELECTOR))
 
-        self.assertIn(f'{total_items.text}',
-                      total_items_founded,
-                      'Error, I can not find anything')
+        self.assertEqual(f'{int(total_items.text)}',
+                         f'{len(total_items_founded)}',
+                         "Error, the results don't match")
 
     def test_04_sorting_items(self):
         BaseMethods.close_demo_navigation(self)
