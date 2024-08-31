@@ -61,7 +61,7 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
         message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SEARCH_ERROR_SELECTOR)).text
 
         self.assertEqual(f'{message_container}',
-                         'Your search returned no results.\nDid you mean\nbase\nbest',
+                         'Your search returned no results.\nDid you mean\nbeat\nbest',
                          'Error, The message is not the same')
 
     def test_03_selecting_products_filter(self):
@@ -91,7 +91,7 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
 
         self.assertEqual(f'{int(total_items.text)}',
                          f'{len(total_items_founded)}',
-                         "Error, the results don't match")
+                         'Error, the results don\'t match')
 
     def test_04_sorting_items(self):
         BaseMethods.close_demo_navigation(self)
