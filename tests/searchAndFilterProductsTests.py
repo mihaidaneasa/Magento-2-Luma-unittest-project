@@ -58,7 +58,8 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
         SearchAndFilterProducts.search_items(self, 'Bees')
 
         # Verify if the code is ok
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SEARCH_ERROR_SELECTOR)).text
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(SEARCH_ERROR_SELECTOR)).text
 
         self.assertEqual(f'{message_container}',
                          'Your search returned no results.\nDid you mean\nbase\nbest',
@@ -87,7 +88,8 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
 
         # Verify if the code is ok
         total_items = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(TOTAL_SEARCHED_ITEMS_SELECTOR))
-        total_items_founded = WebDriverWait(self.driver, 5).until(EC.presence_of_all_elements_located(PRODUCT_ITEM_SELECTOR))
+        total_items_founded = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_all_elements_located(PRODUCT_ITEM_SELECTOR))
 
         self.assertEqual(f'{int(total_items.text)}',
                          f'{len(total_items_founded)}',
@@ -109,7 +111,8 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
         while True:
             try:
                 # Finding elements and transform them to float
-                product_price = WebDriverWait(self.driver, 5).until(EC.presence_of_all_elements_located(PRODUCT_PRICE_SELECTOR))
+                product_price = WebDriverWait(self.driver, 5).until(
+                    EC.presence_of_all_elements_located(PRODUCT_PRICE_SELECTOR))
                 price_list = []
                 SearchAndFilterProducts.scroll_down(self)
 
@@ -148,8 +151,8 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
         BaseMethods.close_demo_navigation(self)
 
         # Select pants products from the list
-        man_manu = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MAN_MENU_SELECTOR))
-        ActionChains(self.driver).move_to_element(man_manu).perform()
+        man_menu = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MAN_MENU_SELECTOR))
+        ActionChains(self.driver).move_to_element(man_menu).perform()
         bottoms_menu = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MAN_BOTTOMS_MENU_SELECTOR))
         ActionChains(self.driver).move_to_element(bottoms_menu).perform()
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(MAN_PANTS_MENU_SELECTOR)).click()
@@ -179,7 +182,5 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
         presentation_images = self.driver.find_elements(*PRODUCT_PRESENTATION_IMAGES_SELECTOR)
         listed_images_2 = list(presentation_images)
 
-        print(len(listed_images_1))
-        print(len(listed_images_2))
         # Verify if the filter modifies the page
         self.assertEqual(f'{len(listed_images_1)}', f'{len(listed_images_2)}', 'The page was modified')
