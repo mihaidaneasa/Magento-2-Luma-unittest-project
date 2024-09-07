@@ -38,7 +38,8 @@ class SingInTests(unittest.TestCase, BaseMethods):
         # Verify if the code is ok
         # Find elements
         time.sleep(3)
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -117,7 +118,8 @@ class SingInTests(unittest.TestCase, BaseMethods):
             self.driver.execute_script(f"window.scrollTo(0, {i * 500});")
 
         # Accept cookies
-        accept_cookies = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(FACEBOOCK_ACCEPT_COOKIES_SELECTOR))
+        accept_cookies = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(FACEBOOCK_ACCEPT_COOKIES_SELECTOR))
         ActionChains(self.driver).move_to_element(accept_cookies).click(accept_cookies).perform()
 
         # Verify if the code is ok
@@ -190,74 +192,94 @@ class SingInTests(unittest.TestCase, BaseMethods):
                 login_page = self.driver.switch_to.window(currentWindow)
                 break
 
-        # Input email
-        # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_USER_EMAIL_SELECTOR))
-        user_email = self.driver.find_element(*YAHOO_USER_EMAIL_SELECTOR)
-        next_button = self.driver.find_element(*YAHOO_NEXT_BUTTON_SELECTOR_1)
+        try:
+            self.driver.find_element(*YAHOO_USER_EMAIL_SELECTOR)
+            sign_in = True
+        except:
+            sign_in = False
 
-        # Actions
-        user_email.click()
-        user_email.clear()
-        user_email.send_keys('mihaiteste@yahoo.com')
+        if sign_in:
+            # Input email
+            # Find elements
+            WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_USER_EMAIL_SELECTOR))
+            user_email = self.driver.find_element(*YAHOO_USER_EMAIL_SELECTOR)
+            next_button = self.driver.find_element(*YAHOO_NEXT_BUTTON_SELECTOR_1)
 
-        next_button.click()
+            # Actions
+            user_email.click()
+            user_email.clear()
+            user_email.send_keys('mihaiteste@yahoo.com')
 
-        # Input password
-        # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_USER_PASSWORD_SELECTOR))
-        user_password = self.driver.find_element(*YAHOO_USER_PASSWORD_SELECTOR)
-        next_button = self.driver.find_element(*YAHOO_NEXT_BUTTON_SELECTOR_2)
+            next_button.click()
 
-        # Actions
-        user_password.click()
-        user_password.clear()
-        user_password.send_keys('245228@Magento')
+            # Input password
+            # Find elements
+            WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_USER_PASSWORD_SELECTOR))
+            user_password = self.driver.find_element(*YAHOO_USER_PASSWORD_SELECTOR)
+            next_button = self.driver.find_element(*YAHOO_NEXT_BUTTON_SELECTOR_2)
 
-        next_button.click()
+            # Actions
+            user_password.click()
+            user_password.clear()
+            user_password.send_keys('245228@Magento')
 
-        # Accept cookies
-        # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_ACCEPT_COOKIES_SELECTOR))
-        accept_cookies = self.driver.find_element(*YAHOO_ACCEPT_COOKIES_SELECTOR)
+            next_button.click()
 
-        # Actions
-        accept_cookies.click()
+            # Accept cookies
+            # Find elements
+            WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_ACCEPT_COOKIES_SELECTOR))
+            accept_cookies = self.driver.find_element(*YAHOO_ACCEPT_COOKIES_SELECTOR)
 
-        # Change control to main page
-        self.driver.switch_to.window(main_page)
+            # Actions
+            accept_cookies.click()
 
-        # Find and click yahoo_login button
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_LOGIN_SELECTOR)).click()
+            # Change control to main page
+            self.driver.switch_to.window(main_page)
 
-        # Input and confirm password
-        # Find elements
-        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_INPUT_PASSWORD_SELECTOR))
-        insert_password = self.driver.find_element(*YAHOO_INPUT_PASSWORD_SELECTOR)
-        confirm_password = self.driver.find_element(*YAHOO_CONFIRM_PASSWORD_SELECTOR)
-        submit_button = self.driver.find_element(*YAHOO_SUBMIT_SELECTOR)
+            # Find and click yahoo_login button
+            WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_LOGIN_SELECTOR)).click()
 
-        # Actions
-        insert_password.click()
-        insert_password.clear()
-        insert_password.send_keys('test@magento1')
+            # Input and confirm password
+            # Find elements
+            WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(YAHOO_INPUT_PASSWORD_SELECTOR))
+            insert_password = self.driver.find_element(*YAHOO_INPUT_PASSWORD_SELECTOR)
+            confirm_password = self.driver.find_element(*YAHOO_CONFIRM_PASSWORD_SELECTOR)
+            submit_button = self.driver.find_element(*YAHOO_SUBMIT_SELECTOR)
 
-        confirm_password.click()
-        confirm_password.clear()
-        confirm_password.send_keys('test@magento1')
+            # Actions
+            insert_password.click()
+            insert_password.clear()
+            insert_password.send_keys('test@magento1')
 
-        submit_button.click()
+            confirm_password.click()
+            confirm_password.clear()
+            confirm_password.send_keys('test@magento1')
 
-        # Verify if the code is ok
-        # Find elements
-        time.sleep(5)
-        message_container = WebDriverWait(self.driver, 50).until(EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
-        message_text = message_container.text
+            submit_button.click()
 
-        # Actions
-        self.assertIn('Welcome, Mihai Daneasa!',
-                      message_text,
-                      'ERROR! The text is not present on page!')
+            # Verify if the code is ok
+            # Find elements
+            time.sleep(5)
+            message_container = WebDriverWait(self.driver, 50).until(
+                EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
+            message_text = message_container.text
+
+            # Actions
+            self.assertIn('Welcome, Mihai Daneasa!',
+                          message_text,
+                          'ERROR! The text is not present on page!')
+
+        if not sign_in:
+            # Verify if the code is ok
+            # Find elements
+            message_container = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located(YAHOO_ERROR_MESSAGE_SELECTOR))
+            message_text = message_container.text
+            print(message_text)
+            # Actions
+            self.assertIn('Looks like something went wrong.',
+                          message_text,
+                          'ERROR! The text is not present on page!')
 
     def test_08_github_login(self):
         global login_page
@@ -305,7 +327,8 @@ class SingInTests(unittest.TestCase, BaseMethods):
 
         # Verify if we are logged in
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -329,7 +352,8 @@ class SingInTests(unittest.TestCase, BaseMethods):
         # Verify if the code is ok
         # Find elements
         time.sleep(3)
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SIGN_OUT_MESSAGE_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(SIGN_OUT_MESSAGE_SELECTOR))
         message_text = message_container.text
 
         # Actions
