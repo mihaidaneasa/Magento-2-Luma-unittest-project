@@ -45,12 +45,11 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
         # Add the product to cart
         WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(ADD_TO_CART_SELECTOR)).click()
-
         time.sleep(10)
+
         # Verify if we are redirected to the cart page
         current_url = self.driver.current_url
-        message_text = current_url
-        self.assertEqual(message_text, 'https://osc-ultimate-demo.mageplaza.com/admindemo/', 'The page is not the same')
+        self.assertEqual(current_url, 'https://osc-ultimate-demo.mageplaza.com/default/admindemo/', 'The page is not the same')
 
         # Verify if the product in cart is the same with the selected one
         time.sleep(2)
