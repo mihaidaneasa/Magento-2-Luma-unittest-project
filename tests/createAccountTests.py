@@ -44,16 +44,19 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         if create_account:
             time.sleep(5)
-            message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
+            message_container = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
             message_text = message_container.text
             self.assertIn('Welcome, Mihai Daneasa!',
                           message_text,
                           'ERROR! The text is not present on page!')
 
         if not create_account:
-            message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(ERROR_CREATE_MESSAGE_SELECTOR))
+            message_container = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located(ERROR_CREATE_MESSAGE_SELECTOR))
             message_text = message_container.text
-            self.assertIn('There is already an account with this email address. If you are sure that it is your email address, ',
+            self.assertIn('There is already an account with this email address. '
+                          'If you are sure that it is your email address, ',
                           message_text,
                           'ERROR! The text is not present on page!')
 
@@ -63,7 +66,8 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         # Verify if the code is ok
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(ERROR_INVALID_FIELD_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(ERROR_INVALID_FIELD_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -77,7 +81,8 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         # Verify if the code is ok
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(CREATE_FIRST_NAME_INVALID_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(CREATE_FIRST_NAME_INVALID_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -91,7 +96,8 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         # Verify if the code is ok
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(CREATE_LAST_NAME_INVALID_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(CREATE_LAST_NAME_INVALID_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -112,14 +118,16 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         if create_account:
             time.sleep(5)
-            message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
+            message_container = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located(WELCOME_MESSAGE_SELECTOR))
             message_text = message_container.text
             self.assertIn('Welcome, Mihai1 Daneasa1!',
                           message_text,
                           'ERROR! The text is not present on page!')
 
         if not create_account:
-            message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(ERROR_CREATE_MESSAGE_SELECTOR))
+            message_container = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located(ERROR_CREATE_MESSAGE_SELECTOR))
             message_text = message_container.text
             self.assertIn(
                 'There is already an account with this email address. If you are sure that it is your email address, ',
@@ -132,7 +140,8 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         # Verify if the code is ok
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(CREATE_SHORT_PASSWORD_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(CREATE_SHORT_PASSWORD_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -146,7 +155,8 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         # Verify if the code is ok
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(CREATE_SIX_CHARACTER_PASSWORD_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(CREATE_SIX_CHARACTER_PASSWORD_SELECTOR))
         message_text = message_container.text
 
         # Actions
@@ -160,10 +170,12 @@ class CreateAccountTests(unittest.TestCase, BaseMethods, CreateAccount):
 
         # Verify if the code is ok
         # Find elements
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(CREATE_INVALID_PASSWORD_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(CREATE_INVALID_PASSWORD_SELECTOR))
         message_text = message_container.text
 
         # Actions
-        self.assertIn('Minimum of different classes of characters in password is 3. Classes of characters: Lower Case, Upper Case, Digits, Special Characters.',
+        self.assertIn('Minimum of different classes of characters in password is 3. '
+                      'Classes of characters: Lower Case, Upper Case, Digits, Special Characters.',
                       message_text,
                       'ERROR! The text is not present on page!')

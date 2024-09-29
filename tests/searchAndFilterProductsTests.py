@@ -28,7 +28,7 @@ class SearchAndFilterProducts(unittest.TestCase, BaseMethods, SearchAndFilterPro
 
     def test_01_search_product(self):
         BaseMethods.close_demo_navigation(self)
-        SearchAndFilterProducts.search_items(self, 'Hood')
+        SearchAndFilterProducts.search_items(self, 'pants')
 
         # Verify if the code is ok
         while True:

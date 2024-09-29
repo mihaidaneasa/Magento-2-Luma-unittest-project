@@ -37,7 +37,8 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
         ShoppingCart.select_a_product(self)
 
         # storing the product name
-        selected_product_name = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SELECTED_PRODUCT_NAME_SELECTOR))
+        selected_product_name = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(SELECTED_PRODUCT_NAME_SELECTOR))
         product_name_1 = selected_product_name.text
 
         # Select the desired options
@@ -49,11 +50,13 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
         # Verify if we are redirected to the cart page
         current_url = self.driver.current_url
-        self.assertEqual(current_url, 'https://osc-ultimate-demo.mageplaza.com/default/admindemo/', 'The page is not the same')
+        self.assertEqual(current_url, 'https://osc-ultimate-demo.mageplaza.com/default/admindemo/',
+                         'The page is not the same')
 
         # Verify if the product in cart is the same with the selected one
         time.sleep(2)
-        cart_product_name = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(CART_PRODUCT_NAME_SELECTOR))
+        cart_product_name = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(CART_PRODUCT_NAME_SELECTOR))
         product_name_2 = cart_product_name.text
         self.assertEqual(f'{product_name_1}', f'{product_name_2}', 'The product is not the same')
 
@@ -78,7 +81,8 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
         ShoppingCart.remove_items(self)
 
         # Verify if the cart is empty
-        message_container = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(DELETED_ITEMS_MESSAGE_SELECTOR))
+        message_container = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(DELETED_ITEMS_MESSAGE_SELECTOR))
         message_text = message_container.text
         self.assertIn('You have no items in your shopping cart.',
                       message_text,
@@ -92,7 +96,8 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
         # Storing the product base price
         i = 2
-        product_price = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(PRODUCT_FINAL_PRICE_SELECTOR))
+        product_price = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(PRODUCT_FINAL_PRICE_SELECTOR))
         current_price = product_price.text
         current_price_without_dollar = current_price.replace('$', '')
         actual_price = float(current_price_without_dollar)
@@ -106,7 +111,8 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
         # Verify if the product price in cart is the same with the selected product price
         time.sleep(1)
-        cart_product_price = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(CART_PRODUCT_PRICE_SELECTOR))
+        cart_product_price = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(CART_PRODUCT_PRICE_SELECTOR))
         cart_current_price = cart_product_price.text
         cart_current_price_without_dollar = cart_current_price.replace('$', '')
         subtotal_price = float(cart_current_price_without_dollar)
@@ -123,7 +129,8 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
         # Storing the product base price
         i = 5
-        product_price = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(PRODUCT_FINAL_PRICE_SELECTOR))
+        product_price = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(PRODUCT_FINAL_PRICE_SELECTOR))
         current_price = product_price.text
         current_price_without_dollar = current_price.replace('$', '')
         actual_price = float(current_price_without_dollar)
@@ -136,7 +143,8 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
         # Verify if the cart total price is correctly calculated
         time.sleep(1)
-        shipping_product_fee = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(SHIPPING_FEE_SELECTOR))
+        shipping_product_fee = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(SHIPPING_FEE_SELECTOR))
         shipping_current_fee = shipping_product_fee.text
         shipping_current_fee_without_dollar = shipping_current_fee.replace('$', '')
         shipping_value = float(shipping_current_fee_without_dollar)
@@ -148,7 +156,8 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
         try:
             if i >= 3:
-                discount_amount = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(DISCOUNT_AMOUNT_SELECTOR))
+                discount_amount = WebDriverWait(self.driver, 5).until(
+                    EC.presence_of_element_located(DISCOUNT_AMOUNT_SELECTOR))
                 discount_value = discount_amount.text
                 discount_value_without_dollar = discount_value.replace('$', '')
                 total_discount_value = float(discount_value_without_dollar)
@@ -230,7 +239,8 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
         time.sleep(10)
         # Find elements
-        billing_address = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(CHECKBOX_BILLING_ADDRESS_SELECTOR))
+        billing_address = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(CHECKBOX_BILLING_ADDRESS_SELECTOR))
         accept_agreement = self.driver.find_element(*ACCEPT_AGREEMENT)
 
         # Actions

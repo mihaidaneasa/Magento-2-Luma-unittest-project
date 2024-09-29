@@ -2,9 +2,9 @@ from selenium.webdriver.common.by import By
 
 CLOSE_DEMO_NAVIGATION_SELECTOR = (By.XPATH, '//button[@class="navigation-close" and @title="Close navigation"]')
 LAST_PAGE_NUMBER_SELECTOR = (By.XPATH, '//div[@class="pages"]/ul[@class="items pages-items"]/li[@class="item"][last()]/a/span[last()][last()]')
-MAN_BOTTOMS_MENU_SELECTOR = (By.XPATH, '//a[@id="ui-id-18"]')
-MAN_MENU_SELECTOR = (By.XPATH, '//li[@class="level0 nav-3 category-item level-top parent ui-menu-item"]')
-MAN_PANTS_MENU_SELECTOR = (By.XPATH, '//a[@id="ui-id-19"]')
+MAN_BOTTOMS_MENU_SELECTOR = (By.XPATH, '//a[@id="ui-id-23"]')
+MAN_MENU_SELECTOR = (By.XPATH, '//a[@id="ui-id-17"]')
+MAN_PANTS_MENU_SELECTOR = (By.XPATH, '//a[@id="ui-id-24"]')
 NEXT_PAGE_SELECTOR = (By.XPATH, '//a[@class="action  next"]')
 PRODUCT_CATEGORY_SELECTOR = (By.XPATH, '(//a[contains(text(), "Hoodies & Sweatshirts")])[2]')
 PRODUCT_COLOR_SELECTOR = (By.XPATH, '//div[contains(text(), "Color")]')
