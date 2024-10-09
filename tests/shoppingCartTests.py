@@ -116,7 +116,7 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
         cart_current_price = cart_product_price.text
         cart_current_price_without_dollar = cart_current_price.replace('$', '')
         subtotal_price = float(cart_current_price_without_dollar)
-        self.assertEqual(f'{final_price}', f'{subtotal_price}', 'The product is not the same')
+        self.assertEqual(f'{final_price}', f'{subtotal_price}', 'The product price is not the correct')
 
         # Emptying the cart
         ShoppingCart.remove_items(self)
@@ -169,7 +169,7 @@ class CartTests(unittest.TestCase, BaseMethods, ShoppingCart):
 
         order_price = order_value + shipping_value
 
-        self.assertEqual(f'{order_price}', f'{order_total}', 'The product is not the same')
+        self.assertEqual(f'{order_price}', f'{order_total}', 'The product value is not the correct')
 
         # Emptying the cart
         ShoppingCart.remove_items(self)
